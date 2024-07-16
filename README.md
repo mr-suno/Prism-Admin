@@ -9,6 +9,13 @@ Currently, Prism is in BETA v1.0.0, with `0` commands.
 
 **Prism** is not intended to be used as a main command-line source, instead check out **[Infinite Yield](https://github.com/EdgeIY/infiniteyield)**.
 
+> Use Prism for Yourself:
+```lua
+loadstring(game:HttpGet(
+  "https://github.com/mr-suno/Prism-Admin/blob/main/main.lua?raw=true"
+))()
+```
+
 ---
 
 - **Main Differences from IY and Prism**:
