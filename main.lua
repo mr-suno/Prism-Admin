@@ -299,13 +299,13 @@ end
                if Key == Components.Configurations.Prefix then
                   Input:CaptureFocus()
                   
-                  task.spawn(function()
-                     repeat
-                        Input.Text = ""
+                  -- task.spawn(function()
+                  --    repeat
+                  --       Input.Text = ""
    
-                        task.wait()
-                     until Input.Text == ""
-                  end)
+                  --       task.wait()
+                  --    until Input.Text == ""
+                  -- end)
                end
             end
 
@@ -455,7 +455,15 @@ else
 end
 
 Input.FocusLost:Connect(function()
-   Handle(Components.Configurations.Prefix .. Input.Text)
+   Handle(Input.Text)
+
+   task.spawn(function()
+      repeat
+         Input.Text = ""
+
+         task.wait()
+      until Input.Text == ""
+   end)
 end)
 
 local function FindPlayer(Target: string)
