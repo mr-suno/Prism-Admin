@@ -99,7 +99,7 @@ local function CreateSidenote(Header: string, Content: string)
          local Padding = Instance.new("UIPadding", Description) do
             
             Padding.PaddingRight = UDim.new(0, 15)
-            Padding.PaddingLeft = UDim.new(0, 8)
+            Padding.PaddingLeft  = UDim.new(0, 8)
 
          end
 
