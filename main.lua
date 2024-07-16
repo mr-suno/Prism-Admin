@@ -230,7 +230,7 @@ end
 --[[ Apologies for any messes, this is horrible ... ]]
 --[[ Create our UI ]] do
 
-   for _, Expired in ipairs(Components.Services.CG:GetChildren()) do if Expired:IsA("ScreenGui") and string.find(Expired.Name, "Prism") then Expired:Destroy() end end
+   for _, Expired in ipairs(Components.Services.CG:GetChildren()) do if Expired:IsA("ScreenGui") and string.find(Expired.Name, "Prism") then Disabled = true Expired:Destroy() end end
    
    local Main = Instance.new("ScreenGui", Components.Services.CG)
    local Base = Instance.new("Frame",     Main) do
@@ -499,7 +499,7 @@ end
 --[[ Add Basic Commands ]] do
 
    Command({ "dex", "newdex", "explorer" }, function()
-      CreateSidenote("Please wait...", "Depending on your exploit, this may take a second.")
+      CreateSidenote("Loading", "Depending on your exploit, this may take a second.")
 
       loadstring(game:HttpGet("https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/dex.lua"))()
    end)
@@ -525,7 +525,7 @@ end
       if select(1, pcall(hookfunction)) then
          CreateNotification("Unsupported Command", "Your exploit does not meet the requirements to run this command.\nMissing: <b>hookfunction</b>")
       else
-         CreateSidenote("Please wait...", "Simple Spy is currently launching.")
+         CreateSidenote("Loading", "Simple Spy is currently launching.")
 
          loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpyBeta.lua"))()
       end
@@ -550,7 +550,7 @@ end
    end)
 
    Command({ "reload", "relaunch", "restart" }, function()
-      CreateNotification("Please wait...", "The script is attempting to relaunch.\nThis should take at most a few seconds.")
+      CreateNotification("Loading", "The script is attempting to relaunch.\nThis should take at most a few seconds.")
       Disabled = true
 
       task.wait(0.25)
@@ -562,7 +562,7 @@ end
    end)
 
    Command({ "close", "quit", "stop" }, function()
-      CreateNotification("Please wait...", "The script is currently shutting down.")
+      CreateNotification("Loading", "The script is currently shutting down.")
       Disabled = true
 
       task.wait(0.25)
@@ -631,6 +631,18 @@ end
 
          CreateSidenote("Prefix Changed", "Prism will now only respond to your prefix: <b>" .. Caption .. "</b>")
       end
+   end)
+
+   Command({ "void", "plrvoid" }, function()
+      workspace.FallenPartsDestroyHeight = -math.huge
+
+      local Old = You.Character:FindFirstChild("HumanoidRootPart").CFrame
+
+      You.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(You.Character:FindFirstChild("HumanoidRootPart").CFrame.X, You.Character:FindFirstChild("HumanoidRootPart").CFrame.Y - 1000, You.Character:FindFirstChild("HumanoidRootPart").CFrame.Z)
+   
+      task.wait(2)
+
+      You.Character:FindFirstChild("HumanoidRootPart").CFrame = Old
    end)
 
 end
