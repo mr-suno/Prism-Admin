@@ -54,7 +54,7 @@ end
       Base.Size        = UDim2.new(0, 250, 0, 220)
       Base.BackgroundTransparency = 0
       Base.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-      Base.Position    = UDim2.new(1, 0, 0, 0)
+      Base.Position    = UDim2.new(1, 0, 1, 0)
       Base.ZIndex      = 0
 
    end
@@ -184,3 +184,5 @@ end
    Main.Name = "Prism Admin " .. Components.Configurations["Content-Type"] .. " v" .. Components.Configurations.Version
    Header.Text = Main.Name
 end
+
+Chat("[+] loaded")
