@@ -5,7 +5,7 @@
 
 A project based off **[Infinite Yield](https://github.com/EdgeIY/infiniteyield)**, designed entirely for studying and learning deeper into Lua.
 
-Currently, Prism is in BETA v1.0.1, with `14` commands.
+Currently, Prism is in BETA v1.0.1, with `16` commands.
 
 **Prism** is not intended to be used as a main command-line source, instead check out **[Infinite Yield](https://github.com/EdgeIY/infiniteyield)**.
 
