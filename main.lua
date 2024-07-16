@@ -20,7 +20,8 @@ local Components = {
       ["P"] = Get(game, "Players"),
       ["CG"] = Get(game, "CoreGui"),
       ["TP"] = Get(game, "TeleportService"),
-      ["UIS"] = Get(game, "UserInputService")
+      ["UIS"] = Get(game, "UserInputService"),
+      ["RUS"] = Get(game, "RunService")
    },
 
    ["Configurations"] = {
@@ -93,6 +94,14 @@ local function CreateSidenote(Header: string, Content: string)
          Description.RichText               = true
          Description.TextWrapped            = true
          Description.BorderSizePixel        = 0
+         Description.ClipsDescendants       = true
+
+         local Padding = Instance.new("UIPadding", Description) do
+            
+            Padding.PaddingRight = UDim.new(0, 15)
+            Padding.PaddingLeft = UDim.new(0, 8)
+
+         end
 
       end
 
@@ -292,20 +301,13 @@ end
          Input.TextDirection          = Enum.TextDirection.LeftToRight
          Input.ClipsDescendants       = true
          Input.TextXAlignment         = Enum.TextXAlignment.Left
+         Input.ClearTextOnFocus       = false
 
          --[[ Add Logic ]] do
 
             local function KeyInputs(Key)
                if Key == Components.Configurations.Prefix then
                   Input:CaptureFocus()
-                  
-                  -- task.spawn(function()
-                  --    repeat
-                  --       Input.Text = ""
-   
-                  --       task.wait()
-                  --    until Input.Text == ""
-                  -- end)
                end
             end
 
@@ -455,15 +457,23 @@ else
 end
 
 Input.FocusLost:Connect(function()
-   Handle(Input.Text)
+   -- local Prefix = Components.Configurations.Prefix
+
+   -- if not string.find(Input.Text, Prefix) then
+   --    CreateSidenote("Invalid Command", "Usage of " .. Prefix .. " is required before any type of command.")
+   -- end
+
+   local Saved = Input.Text
 
    task.spawn(function()
       repeat
          Input.Text = ""
 
-         task.wait()
+         Components.Services.RUS.Heartbeat:Wait()
       until Input.Text == ""
    end)
+
+   Handle(Saved)
 end)
 
 local function FindPlayer(Target: string)
@@ -489,7 +499,7 @@ end
 --[[ Add Basic Commands ]] do
 
    Command({ "dex", "newdex", "explorer" }, function()
-      CreateSidenote("Please wait...", "This may take a second.")
+      CreateSidenote("Please wait...", "Depending on your exploit, this may take a second.")
 
       loadstring(game:HttpGet("https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/dex.lua"))()
    end)
