@@ -184,15 +184,34 @@ end
 
       local Dictionary = Instance.new("ScrollingFrame", Commands) do
          
-         Dictionary.AnchorPoint = Vector2.new(0.5, 0.5)
-         Dictionary.Size        = UDim2.new(0.95, 0, 0.95, 0)
-         Dictionary.Position    = UDim2.new(0.5, 0, 0.5, 0)
-         -- Dictionary.ScrollBarThickness = 0
+         -- Dictionary.AnchorPoint = Vector2.new(1, 0.5)
+         Dictionary.Size        = UDim2.new(1, 0, 1, 0)
+         Dictionary.Position    = UDim2.new(0, 0, 0, -1)
          Dictionary.BackgroundTransparency = 1
          Dictionary.AutomaticCanvasSize = Enum.AutomaticSize.Y
          Dictionary.CanvasSize  = UDim2.new(0, 0, 0, 0)
+         Dictionary.ScrollBarImageTransparency = 0
+         Dictionary.ScrollBarThickness = 8 do
+
+            -- Useless textures
+            
+            Dictionary.TopImage    = "rbxasset://textures/ui/Scroll/scroll-middle.png"
+            Dictionary.MidImage    = "rbxasset://textures/ui/Scroll/scroll-middle.png"
+            Dictionary.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
+
+         end
+
+         Dictionary.ScrollBarImageColor3 = Color3.fromRGB(78, 78, 79)
 
          local Layout = Instance.new("UIListLayout", Dictionary) do end
+
+         local Padding = Instance.new("UIPadding", Dictionary) do
+            
+            -- Padding.PaddingTop = UDim.new(0, 0)
+            Padding.PaddingLeft = UDim.new(0, 5)
+            Padding.PaddingBottom = UDim.new(0, 3)
+
+         end
 
       end
 
@@ -329,6 +348,10 @@ end
       table.remove(Arguments, 1)
       
       local Target = FindPlayer(table.concat(Arguments, " "))
+
+      if not Target then
+         return
+      end
       
       You.Character:FindFirstChild("HumanoidRootPart").CFrame = Get(game, "Players")[Target.Name].Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(1.5, 0, 2)
    end)
@@ -343,11 +366,20 @@ end
 
    Command({ "ws", "speed", "walkspeed" }, function(...)
       local Arguments = {...}
-      tabel.remove(Arguments, 1)
+      table.remove(Arguments, 1)
 
       local Amount = tonumber(table.concat(Arguments, " "))
 
       You.Character:FindFirstChild("Humanoid").WalkSpeed = Amount
+   end)
+
+   Command({ "jp", "jumppower", "jpower", "jpw" }, function(...)
+      local Arguments = {...}
+      table.remove(Arguments, 1)
+
+      local Amount = tonumber(table.concat(Arguments, " "))
+
+      You.Character:FindFirstChild("Humanoid").JumpPower = Amount
    end)
 
    Command({ "reload", "relaunch", "restart" }, function()
@@ -368,6 +400,36 @@ end
 
       task.wait(0.25)
       Get(game, "CoreGui")[Factor]:Destroy()
+   end)
+
+   Command({ "hh", "hipheight", "height" }, function(...)
+      local Arguments = {...}
+      table.remove(Arguments, 1)
+
+      local Amount = tonumber(table.concat(Arguments, " "))
+
+      if Amount < 0 then
+         Amount = 0
+      end
+
+      if Amount > 999 then
+         Amount = 999
+      end
+
+      You.Character:FindFirstChild("Humanoid").HipHeight = Amount
+   end)
+
+   Command({ "cb", "cbring", "clientbring", "cbr" }, function(...)
+      local Arguments = {...}
+      table.remove(Arguments, 1)
+      
+      local Target = FindPlayer(table.concat(Arguments, " "))
+
+      if not Target then
+         return
+      end
+
+      Get(game, "Players")[Target.Name].Character:FindFirstChild("HumanoidRootPart").CFrame = You.Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(3, 0, 0)
    end)
 
 end
