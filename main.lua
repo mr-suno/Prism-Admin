@@ -362,6 +362,14 @@ end
       ))()
    end)
 
+   Command({ "close", "quit", "stop" }, function()
+      CreateNotification("Please wait...", "The script is currently shutting down.")
+      Disabled = true
+
+      task.wait(0.25)
+      Get(game, "CoreGui")[Factor]:Destroy()
+   end)
+
 end
 
 Chat("[+] loaded")
