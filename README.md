@@ -5,7 +5,7 @@
 
 A project based off **[Infinite Yield](https://github.com/EdgeIY/infiniteyield)**, designed entirely for studying and learning deeper into Lua.
 
-Currently, Prism is in BETA v1.0.0, with `7` commands.
+Currently, Prism is in BETA v1.0.0, with `14` commands.
 
 **Prism** is not intended to be used as a main command-line source, instead check out **[Infinite Yield](https://github.com/EdgeIY/infiniteyield)**.
 
@@ -27,3 +27,9 @@ loadstring(game:HttpGet(
 P.S. _This project is likely to not be maintained, and bug fixes may not come._
 
 Prism developed by Suno **<|:)**
+
+---
+
+### Latest Updates:
+1. Working `hookfunction` check for Remote Spy
+- - Solara exclusive commands: `;files` `;open-url` and more
