@@ -498,6 +498,27 @@ end
 
 --[[ Add Basic Commands ]] do
 
+   if string.find(string.lower(identifyexecutor()), "solara") then
+      
+      Command({ "open-url", "openurl", "open", "url" }, function(...)
+         local Arguments = {...}
+         table.remove(Arguments, 1)
+
+         local Webpage = table.concat(Arguments, " ")
+
+         if not string.find("https://", Webpage) then
+            Webpage = "https://" .. Webpage
+         end
+
+         Get(game, "LinkingService\0"):OpenUrl(Webpage)
+      end)
+
+      Command({ "files", "file-explorer", "system", "sys" }, function()
+         Get(game, "LinkingService\0"):OpenUrl("\\")
+      end)
+
+   end
+
    Command({ "dex", "newdex", "explorer" }, function()
       CreateSidenote("Loading", "Depending on your exploit, this may take a second.")
 
