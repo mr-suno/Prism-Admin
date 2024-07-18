@@ -1,3 +1,4 @@
+---@diagnostic disable: invalid-class-name
 --[[
 
    UI Copied from Infinite Yield
@@ -99,7 +100,7 @@ local function CreateSidenote(Header: string, Content: string)
          local Padding = Instance.new("UIPadding", Description) do
             
             Padding.PaddingRight = UDim.new(0, 15)
-            Padding.PaddingLeft  = UDim.new(0, 8)
+            Padding.PaddingLeft = UDim.new(0, 8)
 
          end
 
@@ -518,6 +519,21 @@ end
       end)
 
    end
+
+   Command({ "studs", "studcount", "distance", "dist" }, function(...)
+      local Arguments = {...}
+      table.remove(Arguments, 1)
+
+      local Target = FindPlayer(table.concat(Arguments, " "))
+
+      if not Target then
+         return
+      end
+
+      local Studs = (You.Character:FindFirstChild("HumanoidRootPart").Position - Get(game, "Players")[Target.Name].Character:FindFirstChild("HumanoidRootPart").Position).Magnitude
+
+      CreateSidenote("Stud Distance", string.format("You and " .. Target.Name .. " are %.3f studs apart.", Studs))
+   end)
 
    Command({ "dex", "newdex", "explorer" }, function()
       CreateSidenote("Loading", "Depending on your exploit, this may take a second.")
