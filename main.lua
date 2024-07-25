@@ -586,6 +586,23 @@ end
       You.Character:FindFirstChild("Humanoid").JumpPower = Amount
    end)
 
+   Command({"gravity", "force" }, function(...)
+      local Arguments = {...}
+      table.remove(Arguments, 1)
+
+      local Amount = tonumber(table.concat(Arguments, " "))
+
+      if Amount < 0 then
+         Amount = 0
+      end
+
+      if Amount > 196.2 then
+         Amount = 196.2
+      end
+
+      game:GetService("Workspace").Gravity = Amount
+   end)
+
    Command({ "reload", "relaunch", "restart" }, function()
       CreateNotification("Loading", "The script is attempting to relaunch.\nThis should take at most a few seconds.")
       Disabled = true
